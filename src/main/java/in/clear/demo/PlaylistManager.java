@@ -29,9 +29,9 @@ public class PlaylistManager {
     private void exportPlaylistToCSV(String artist) {
         String fileName = artist.replaceAll("\\s+", "_") + "_playlist.csv";
         try (FileWriter writer = new FileWriter(fileName)) {
-            writer.append("Song Name,Artist\n");
+            writer.append("Here is the listed song for artist: " + artist + "\n");
             for (Song song : playlists.get(artist)) {
-                writer.append(song.name).append(",").append(song.artist).append("\n");
+                writer.append(song.name).append("\n");
             }
             System.out.println("Playlist for " + artist + " exported to " + fileName);
         } catch (IOException e) {
