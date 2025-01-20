@@ -7,11 +7,15 @@ public class SongManager {
     private TreeMap<String, TreeMap<Pair<Integer, Integer>, Song>> artistMap;
     private TreeMap<String, TreeMap<Pair<Integer, Integer>, Song>> dateMap;
     private TreeMap<String, Integer> trackPlayCount;
+    private final PlaylistManager playlistManager;
+
 
     public SongManager() {
         artistMap = new TreeMap<>();
         dateMap = new TreeMap<>();
         trackPlayCount = new TreeMap<>();
+        playlistManager = new PlaylistManager(); // Initialize playlist manager
+
     }
 
     public String Formatted_date(Date date) {
@@ -29,6 +33,9 @@ public class SongManager {
             artistMap.get(artist).put(key, song);
             dateMap.putIfAbsent(releaseDate, new TreeMap<>((p1, p2) -> Integer.compare(p1.first, p2.first)));
             dateMap.get(releaseDate).put(key, song);
+
+            playlistManager.addSongToPlaylist(artist, song);
+
         } catch (Exception e) {
             System.err.println("Error adding song: " + e.getMessage());
         }
@@ -66,6 +73,9 @@ public class SongManager {
         } catch (Exception e) {
             System.err.println("Error playing song: " + e.getMessage());
         }
+    }
+    public List<Song> getPlaylist(String artist) {
+        return playlistManager.getPlaylist(artist);
     }
 
     private void incrementPlayCount(Song song) {  //on an average it will take log(n) time to insert the song in the treeMap

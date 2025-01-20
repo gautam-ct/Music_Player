@@ -29,6 +29,9 @@ public class DemoApplication {
 		system.topSongsByArtist("Artist 1").forEach(System.out::println);
 		System.out.println("\nSongs played less than 2 times:");
 		system.songsPlayLessThan(2).forEach(System.out::println);
+		System.out.println("\nPlaylist for Artist 1:");
+		system.getPlaylist("Artist 1").forEach(System.out::println);
+
 	}
 }
 /*
